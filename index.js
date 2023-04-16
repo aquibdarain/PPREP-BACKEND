@@ -6,7 +6,9 @@ database = require('./config/db.connection')
 PORT = process.env.PORT;
 app.use(express.json());
 
-app.get('/',(req,res)=>{
+app.set('view engine', 'hbs')
+
+app.get('/', (req, res) => {
     res.send("home page")
 })
 app.listen(PORT, () => {
