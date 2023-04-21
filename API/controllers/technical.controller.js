@@ -46,23 +46,24 @@ router.get('/get', (req, res, next) => {
 //     })
 // })
 
-
 router.put('/update/:id',(req, res, next) => {
     let id = req.params.id
-    let technical = req.body;
-    var query5 = "UPDATE technical SET title=?,description=?,image=?,content=? where id=" + id;
+    technical = req.body;
+    var query5 = "UPDATE technical SET question=?,image=?,answer=? where id=" + id;
     connection.query(query5, [technical.question, technical.image, technical.answer], (err, results) => {
         if (!err) {
             if (results.affectedRows == 0) {
-                return res.status(404).json({ message: "blogs id does not found" })
+                return res.status(404).json({ message: "technical id does not found" })
             }
-            return res.status(200).json({ message: "blogs updated successfully" });
+            return res.status(200).json({ message: "technical updated successfully" });
         }
         else {
             return res.status(500).json(err)
         }
     })
 })
+
+
 
 
 // router.delete('/delete/:id', /*checkRole.checkRole,*/(req, res, next) => {
