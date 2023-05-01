@@ -3,16 +3,10 @@ const express = require('express');
 const connection = require('../../config/db.connection');
 let router = express.Router();
 
-// vid3 
 const jwt = require('jsonwebtoken');
-// const nodemailer = require('nodemailer')
-
-
-// vid4 
 var auth = require('../auth/authentication');
 var checkRole = require('../auth/checkRole')
 
-// api // vid 2 // api is working (SignUp) 
 router.post('/signup',
     (req, res) => {
         let user = req.body;
@@ -41,8 +35,6 @@ router.post('/signup',
         })
     })
 
-
-// // vid 3
 router.post('/login', (req, res) => {
     let user = req.body;
     let query2 = "select email,password,role,status from user where email=?";
@@ -112,8 +104,9 @@ router.post('/login', (req, res) => {
 
 // vid 4
 // api is working if auth and check role is removed 
-router.get('/get', (req, res) => {
-    var query = "select id,name,email,contactNumber,status from user where role ='user' ";
+router.get('/getallUser', (req, res) => {
+    // var query = "select id,name,email,contactNumber,status from user where role ='user' ";
+    var query = "select * from user ";
     connection.query(query, (err, results) => {
         if (!err) {
             return res.status(200).json(results);
